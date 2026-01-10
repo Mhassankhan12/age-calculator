@@ -1,52 +1,72 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Age Calculator Pro</title>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="style.css">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
-  </head>
-  <body>
-    
-    <div class="container">
-      <div class="calculator-card">
-        <h1>Age <span>Calculator</span></h1>
-        
-        <div class="input-box">
-          <input type="date" id="date" />
-          <button id="btn">Calculate</button>
-        </div>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
 
-        <div id="result-container" class="hidden">
-           <div class="result-box">
-               <span id="years">0</span>
-               <p>Years</p>
-           </div>
-           <div class="result-box">
-               <span id="months">0</span>
-               <p>Months</p>
-           </div>
-           <div class="result-box">
-               <span id="days">0</span>
-               <p>Days</p>
-           </div>
-        </div>
-        
-        <div id="extra-info" class="hidden">
-            <p id="msg-day"></p>
-            <p id="msg-bday"></p>
-        </div>
+    <nav class="navbar">
+        <div  class="logo">HassanAge<span class="highlight">Calc.</span></div>
+        <button id="theme-toggle" class="theme-btn" aria-label="Toggle Theme">
+            <i class="ri-moon-line" id="theme-icon"></i>
+        </button>
+    </nav>
 
-        <hr>
-        
-        <div class="footer">
-            <p>Designed by <span>Muhammad Hassan</span></p>
-            <p class="college">Student of <span>GDC Mamash Khel Bannu</span></p>
+    <main class="main-container">
+        <div class="card">
+            
+            <div class="card-header">
+                <h1>Calculate Age</h1>
+                <p>Simple, fast, and precise.</p>
+            </div>
+
+            <div class="input-row">
+                <input type="date" id="date">
+                <button id="btn" class="primary-btn">
+                    Calculate <i class="ri-arrow-right-line"></i>
+                </button>
+            </div>
+
+            <div id="result-section" class="results hidden">
+                <div class="stats-grid">
+                    <div class="stat-box">
+                        <span id="years" class="num">0</span>
+                        <span class="label">Years</span>
+                    </div>
+                    <div class="stat-box">
+                        <span id="months" class="num">0</span>
+                        <span class="label">Months</span>
+                    </div>
+                    <div class="stat-box">
+                        <span id="days" class="num">0</span>
+                        <span class="label">Days</span>
+                    </div>
+                </div>
+
+                <div class="extra-info">
+                    <div class="info-item">
+                        <i class="ri-calendar-check-line"></i>
+                        <span id="msg-day">--</span>
+                    </div>
+                    <div class="info-item">
+                        <i class="ri-cake-2-line"></i>
+                        <span id="msg-next-bday">--</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-credit">
+                Designed by <strong>Muhammad Hassan <br>Student of GDC Mamash Khel Bannu</strong>
+            </div>
+
         </div>
-      </div>
-    </div>
-    
+    </main>
+
     <script src="index.js"></script>
-  </body>
+</body>
 </html>

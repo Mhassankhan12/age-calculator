@@ -5,7 +5,7 @@
     --text-sub: #64748b;
     --primary: #4f46e5;
     --primary-hover: #4338ca;
-    --border: #e2e8f0;
+    --border: #cbd5e1;
     --stat-bg: #f1f5f9;
     --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
 }
@@ -33,7 +33,7 @@ body {
     overflow-x: hidden;
 }
 
-/* Navbar (Top) */
+/* Navbar */
 .navbar {
     width: 100%;
     padding: 20px 40px;
@@ -81,31 +81,29 @@ body {
 .card-header h1 { font-size: 1.8rem; font-weight: 700; margin-bottom: 5px; }
 .card-header p { color: var(--text-sub); font-size: 0.95rem; }
 
-
 /* =========================================================
-   DESKTOP DEFAULT STYLES (Ye Desktop par apply honge)
+   DESKTOP DEFAULT STYLES 
    ========================================================= */
 
 .input-row {
     display: flex;
     gap: 15px;
     margin-bottom: 30px;
-    flex-direction: row; /* Side by Side */
-    align-items: center;
+    flex-direction: row; 
+    align-items: stretch;
 }
 
-/* Desktop Defaults */
 input[type="date"] {
     flex: 2;
     padding: 0 20px;
     border-radius: 12px;
     border: 1px solid var(--border);
-    background-color: var(--bg-color);
+    background-color: var(--bg-color); /* Slight grey on desktop */
     color: var(--text-main);
     font-size: 1.1rem;
     outline: none;
     cursor: pointer;
-    height: 55px; /* Normal Height for Desktop */
+    height: 55px;
 }
 
 .primary-btn {
@@ -121,7 +119,7 @@ input[type="date"] {
     align-items: center;
     justify-content: center;
     gap: 8px;
-    height: 55px; /* Normal Height for Desktop */
+    height: 55px; 
 }
 .primary-btn:hover { background-color: var(--primary-hover); transform: translateY(-2px); }
 
@@ -167,7 +165,7 @@ input[type="date"] {
 
 
 /* =========================================================
-   MOBILE FORCE FIX (Ye hai Asli Solution)
+   MOBILE FIXES (CRITICAL UPDATE)
    ========================================================= */
 
 @media (max-width: 600px) {
@@ -176,36 +174,58 @@ input[type="date"] {
     .card { 
         padding: 30px 20px;
         width: 100%;
-        margin-top: 60px; /* Thoda space upar se */
+        margin-top: 50px;
     }
 
-    /* 1. Stack Vertical */
+    .card-header h1 { font-size: 1.6rem; }
+
+    /* Stack Elements */
     .input-row {
-        flex-direction: column !important; /* Force Column */
+        flex-direction: column !important;
         gap: 15px;
     }
 
-    /* 2. SUPER BIG INPUT */
+    /* --- FIXING THE UGLY INPUT --- */
     input[type="date"] {
         width: 100% !important;
-        height: 75px !important; /* Force 75px Height */
-        font-size: 1.3rem !important; /* Bada Text */
-        border: 2px solid var(--border);
-        -webkit-appearance: none; /* Mobile Styling Remove karke apni styling lagana */
-        background-color: var(--stat-bg);
+        height: 70px !important;
+        
+        /* 1. Make it White so it looks like an input */
+        background-color: #ffffff !important; 
+        
+        /* 2. Add Border and Rounding */
+        border: 2px solid var(--primary) !important;
+        border-radius: 15px !important;
+        
+        /* 3. Text Styling */
+        font-size: 1.3rem !important;
+        color: #000000 !important; /* Force Black Text */
+        padding: 0 20px;
+        
+        /* 4. Add Custom Calendar Icon (Because mobile hides the default one) */
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24' fill='%234f46e5'%3E%3Cpath d='M17 3h4a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h4V1h2v2h6V1h2v2zm-2 2H9v2H7V5H4v4h16V5h-3v2h-2V5zm5 6H4v8h16v-8z'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 20px center;
+        background-size: 28px;
     }
 
-    /* 3. SUPER BIG BUTTON */
+    /* Dark Mode Fix for Mobile Input */
+    [data-theme="dark"] input[type="date"] {
+        background-color: #1e293b !important;
+        color: #ffffff !important;
+        border-color: #6366f1 !important;
+    }
+
+    /* --- BIG BUTTON --- */
     .primary-btn {
         width: 100% !important;
-        height: 75px !important; /* Force 75px Height */
-        font-size: 1.4rem !important; /* Bada Text */
-        box-shadow: 0 4px 12px rgba(79, 70, 229, 0.4);
+        height: 70px !important;
+        font-size: 1.3rem !important;
+        box-shadow: 0 4px 15px rgba(79, 70, 229, 0.4);
     }
 
-    /* Extra: Grid spacing kam karein */
-    .stats-grid { gap: 8px; }
-    .stat-box .num { font-size: 1.5rem; }
+    .stats-grid { gap: 10px; }
+    .stat-box .num { font-size: 1.6rem; }
     
     .extra-info {
         flex-direction: column;

@@ -45,15 +45,25 @@ body {
     left: 0;
     z-index: 10;
 }
+/* Logo Styling Updated for Link */
+.logo { 
+    font-size: 1.5rem; 
+    font-weight: 800; 
+    letter-spacing: -0.5px;
+    
+    /* Ye properties zaroori hain taake wo Link jaisa na dikhe */
+    text-decoration: none; /* Underline hatane ke liye */
+    color: var(--text-main); /* Theme ka color use karega */
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
 
-.logo { font-size: 1.5rem; font-weight: 800; letter-spacing: -0.5px; }
-.highlight { color: var(--primary); }
 
-.theme-btn {
-    background: transparent; border: 1px solid var(--border);
-    color: var(--text-main); padding: 10px; border-radius: 50%;
-    cursor: pointer; display: flex; align-items: center; justify-content: center;
-    font-size: 1.2rem;
+/* Hover effect (Optional - taake pata chale click ho sakta hai) */
+.logo:hover {
+    opacity: 0.9;
+   color: #4f46e5;
 }
 
 /* Main Container */

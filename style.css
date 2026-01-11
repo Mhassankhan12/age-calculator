@@ -1,10 +1,9 @@
 :root {
-    /* Professional Color Palette */
-    --bg-color: #f8fafc;        /* Light Grey Background */
-    --card-bg: #ffffff;         /* White Card */
-    --text-main: #0f172a;       /* Dark Text */
-    --text-sub: #64748b;        /* Grey Text */
-    --primary: #4f46e5;         /* Indigo Brand Color */
+    --bg-color: #f8fafc;
+    --card-bg: #ffffff;
+    --text-main: #0f172a;
+    --text-sub: #64748b;
+    --primary: #4f46e5;
     --primary-hover: #4338ca;
     --border: #e2e8f0;
     --stat-bg: #f1f5f9;
@@ -12,9 +11,9 @@
 }
 
 [data-theme="dark"] {
-    --bg-color: #0f172a;        /* Dark Blue Background */
-    --card-bg: #1e293b;         /* Dark Card */
-    --text-main: #f8fafc;       /* White Text */
+    --bg-color: #0f172a;
+    --card-bg: #1e293b;
+    --text-main: #f8fafc;
     --text-sub: #94a3b8;
     --primary: #6366f1;
     --primary-hover: #818cf8;
@@ -28,20 +27,20 @@
 body {
     background-color: var(--bg-color);
     color: var(--text-main);
-    height: 100vh;
-    overflow: hidden; /* No Scroll bar on Desktop */
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
+    overflow-x: hidden;
 }
 
-/* 1. Navbar Styling (Top Fixed) */
+/* Navbar (Top) */
 .navbar {
     width: 100%;
     padding: 20px 40px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    position: absolute; /* Sticks to top */
+    position: absolute;
     top: 0;
     left: 0;
     z-index: 10;
@@ -53,26 +52,25 @@ body {
 .theme-btn {
     background: transparent; border: 1px solid var(--border);
     color: var(--text-main); padding: 10px; border-radius: 50%;
-    margin-top: 2px;
     cursor: pointer; display: flex; align-items: center; justify-content: center;
     font-size: 1.2rem;
 }
-.theme-btn:hover { background-color: var(--stat-bg); transform: rotate(15deg); }
 
-/* 2. Main Content (Perfect Center) */
+/* Main Container */
 .main-container {
     flex: 1;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 20px;
+    width: 100%;
 }
 
 .card {
     background-color: var(--card-bg);
     width: 100%;
-    max-width: 500px;  /* Optimal Width */
-    padding: 40px;     /* Good Spacing */
+    max-width: 550px;
+    padding: 40px;
     border-radius: 24px;
     box-shadow: var(--shadow-lg);
     border: 1px solid var(--border);
@@ -83,26 +81,32 @@ body {
 .card-header h1 { font-size: 1.8rem; font-weight: 700; margin-bottom: 5px; }
 .card-header p { color: var(--text-sub); font-size: 0.95rem; }
 
-/* Input Row */
+
+/* =========================================================
+   DESKTOP DEFAULT STYLES (Ye Desktop par apply honge)
+   ========================================================= */
+
 .input-row {
     display: flex;
-    gap: 12px;
+    gap: 15px;
     margin-bottom: 30px;
-    height: 50px;
+    flex-direction: row; /* Side by Side */
+    align-items: center;
 }
 
+/* Desktop Defaults */
 input[type="date"] {
     flex: 2;
-    padding: 0 15px;
+    padding: 0 20px;
     border-radius: 12px;
     border: 1px solid var(--border);
     background-color: var(--bg-color);
     color: var(--text-main);
-    font-size: 1rem;
+    font-size: 1.1rem;
     outline: none;
     cursor: pointer;
+    height: 55px; /* Normal Height for Desktop */
 }
-input[type="date"]:focus { border-color: var(--primary); }
 
 .primary-btn {
     flex: 1;
@@ -117,10 +121,12 @@ input[type="date"]:focus { border-color: var(--primary); }
     align-items: center;
     justify-content: center;
     gap: 8px;
+    height: 55px; /* Normal Height for Desktop */
 }
 .primary-btn:hover { background-color: var(--primary-hover); transform: translateY(-2px); }
 
-/* Results */
+
+/* Results Styling */
 .hidden { display: none; }
 .results { animation: slideUp 0.4s ease-out; }
 
@@ -133,14 +139,14 @@ input[type="date"]:focus { border-color: var(--primary); }
 
 .stat-box {
     background-color: var(--stat-bg);
-    padding: 15px;
+    padding: 20px 10px;
     border-radius: 16px;
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
 
-.stat-box .num { font-size: 1.8rem; font-weight: 800; color: var(--primary); line-height: 1; }
+.stat-box .num { font-size: 2rem; font-weight: 800; color: var(--primary); line-height: 1; }
 .stat-box .label { font-size: 0.8rem; color: var(--text-sub); margin-top: 5px; text-transform: uppercase; letter-spacing: 0.5px; }
 
 .extra-info {
@@ -151,20 +157,59 @@ input[type="date"]:focus { border-color: var(--primary); }
     justify-content: space-around;
 }
 
-.info-item { display: flex; align-items: center; gap: 8px; font-size: 0.9rem; color: var(--text-main); }
-.info-item i { color: var(--primary); font-size: 1.1rem; }
+.info-item { display: flex; align-items: center; gap: 8px; font-size: 0.95rem; color: var(--text-main); }
+.info-item i { color: var(--primary); font-size: 1.2rem; }
 
-/* Footer */
-.footer-credit { margin-top: 25px; font-size: 0.8rem; color: var(--text-sub); }
+.footer-credit { margin-top: 25px; font-size: 0.85rem; color: var(--text-sub); }
 .footer-credit strong { color: var(--primary); }
 
 @keyframes slideUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-/* Mobile Adjustments */
-@media (max-width: 480px) {
+
+/* =========================================================
+   MOBILE FORCE FIX (Ye hai Asli Solution)
+   ========================================================= */
+
+@media (max-width: 600px) {
     .navbar { padding: 15px 20px; }
-    .card { padding: 25px; }
-    .input-row { flex-direction: column; height: auto; }
-    input[type="date"], .primary-btn { height: 50px; width: 100%; }
-    .extra-info { flex-direction: column; gap: 10px; align-items: start; }
+    
+    .card { 
+        padding: 30px 20px;
+        width: 100%;
+        margin-top: 60px; /* Thoda space upar se */
+    }
+
+    /* 1. Stack Vertical */
+    .input-row {
+        flex-direction: column !important; /* Force Column */
+        gap: 15px;
+    }
+
+    /* 2. SUPER BIG INPUT */
+    input[type="date"] {
+        width: 100% !important;
+        height: 75px !important; /* Force 75px Height */
+        font-size: 1.3rem !important; /* Bada Text */
+        border: 2px solid var(--border);
+        -webkit-appearance: none; /* Mobile Styling Remove karke apni styling lagana */
+        background-color: var(--stat-bg);
+    }
+
+    /* 3. SUPER BIG BUTTON */
+    .primary-btn {
+        width: 100% !important;
+        height: 75px !important; /* Force 75px Height */
+        font-size: 1.4rem !important; /* Bada Text */
+        box-shadow: 0 4px 12px rgba(79, 70, 229, 0.4);
+    }
+
+    /* Extra: Grid spacing kam karein */
+    .stats-grid { gap: 8px; }
+    .stat-box .num { font-size: 1.5rem; }
+    
+    .extra-info {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
 }

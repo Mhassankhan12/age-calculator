@@ -131,7 +131,7 @@ input[type="date"] {
     gap: 8px;
     height: 55px; 
 }
-.primary-btn:hover { background-color: var(--primary-hover); transform: translateY(-2px); }
+.primary-btn:hover { background-color: rgb(8, 8, 174); transform: translateY(-4px); }
 
 
 /* Results Styling */
@@ -242,4 +242,14 @@ input[type="date"] {
         align-items: flex-start;
         gap: 15px;
     }
+}
+.foot{
+     text-decoration: none;
+     color: #6366f1;
+}
+span{
+    color: #413ac1;
+}
+span:hover{
+    color: #0f172a;
 }

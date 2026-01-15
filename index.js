@@ -74,3 +74,14 @@ document.getElementById("btn").addEventListener("click", () => {
 
     resultSection.classList.remove("hidden");
 });
+// ... (Your existing calculator code is above)
+
+// Register Service Worker for PWA
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker
+      .register("./sw.js")
+      .then(() => console.log("PWA Service Worker Registered"))
+      .catch((err) => console.log("Service Worker Failed", err));
+  });
+}

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
+
 <head>
     <link rel="shortcut icon" href="./icon-512 copy.png" type="image/x-icon">
     <meta charset="UTF-8">
@@ -10,67 +11,113 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="manifest" href="manifest.json">
 </head>
+
 <body>
 
-    <nav class="navbar">
-      <a href="https://www.facebook.com/MuhammadHassan025?mibextid=ZbWKwL" target="_blank" class="logo">
-    HassanAge<span class="highlight">Calc.</span>
-</a>
-        <button id="theme-toggle" class="theme-btn" aria-label="Toggle Theme">
-            <i class="ri-moon-line" id="theme-icon"></i>
-        </button>
-    </nav>
-
-    <main class="main-container">
-        <div class="card">
-            
-            <div class="card-header">
-                <h1>Calculate Your Age Here</h1>
-                <p>Simple, fast, and precise.</p>
+    <div class="app-container">
+        <!-- Panel 1: Visual & Time -->
+        <section class="visual-panel">
+            <div class="brand">
+                Hassan<span class="highlight">AgeCalc.</span>
             </div>
 
-            <div class="input-row">
-                <input type="date" id="date">
-                <button id="btn" class="primary-btn">
-                    Calculate <i class="ri-arrow-right-line"></i>
-                </button>
+            <div class="time-display">
+                <h2 id="current-time">00:00:00</h2>
+                <p id="current-date">Monday, 01 Jan 2024</p>
             </div>
 
-            <div id="result-section" class="results hidden">
-                <div class="stats-grid">
-                    <div class="stat-box">
-                        <span id="years" class="num">0</span>
-                        <span class="label">Years</span>
-                    </div>
-                    <div class="stat-box">
-                        <span id="months" class="num">0</span>
-                        <span class="label">Months</span>
-                    </div>
-                    <div class="stat-box">
-                        <span id="days" class="num">0</span>
-                        <span class="label">Days</span>
-                    </div>
+            <div class="quote-box">
+                <p>"Time is the most valuable thing a man can spend."</p>
+            </div>
+
+            <button id="theme-toggle" class="theme-btn" aria-label="Toggle Theme">
+                <i class="ri-moon-line" id="theme-icon"></i>
+            </button>
+        </section>
+
+        <!-- Panel 2: Functional & Stats -->
+        <section class="functional-panel">
+            <div class="input-area">
+                <div class="header-text">
+                    <h1>Explore Your Age</h1>
+                    <p>Enter your details to discover your life stats.</p>
                 </div>
 
-                <div class="extra-info">
-                    <div class="info-item">
-                        <i class="ri-calendar-check-line"></i>
-                        <span id="msg-day">--</span>
-                    </div>
-                    <div class="info-item">
-                        <i class="ri-cake-2-line"></i>
-                        <span id="msg-next-bday">--</span>
-                    </div>
+                <div class="date-picker-wrapper">
+                    <label for="date" class="input-label">Date of Birth</label>
+                    <input type="date" id="date">
+                    <button id="btn" class="action-btn">
+                        Reveal Stats <i class="ri-magic-line"></i>
+                    </button>
                 </div>
             </div>
 
-            <div class="footer-credit">
-                <a href="https://www.facebook.com/MuhammadHassan025?mibextid=ZbWKwL" target="_blank" class="foot" Designed by <strong>Muhammad Hassan <br>Student of GDC Mamash Khel Bannu</strong>
+            <div id="result-section" class="results-grid hidden">
+                <!-- Main Age Card -->
+                <div class="result-card main-stats">
+                    <h3>Your Age</h3>
+                    <div class="age-display">
+                        <div class="unit">
+                            <span id="years">0</span> <small>Years</small>
+                        </div>
+                        <div class="unit">
+                            <span id="months">0</span> <small>Months</small>
+                        </div>
+                        <div class="unit">
+                            <span id="days">0</span> <small>Days</small>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Zodiac Widget -->
+                <div class="result-card zodiac-card">
+                    <div class="icon-bg">
+                        <i class="ri-user-star-line"></i>
+                    </div>
+                    <div>
+                        <span class="card-label">Zodiac Sign</span>
+                        <h4 id="zodiac-sign">--</h4>
+                    </div>
+                </div>
+
+                <!-- Next Birthday Widget -->
+                <div class="result-card next-bday-card">
+                    <div class="icon-bg">
+                        <i class="ri-cake-3-line"></i>
+                    </div>
+                    <div>
+                        <span class="card-label">Next Birthday</span>
+                        <h4 id="msg-next-bday">--</h4>
+                        <span id="msg-day" class="sub-text">--</span>
+                    </div>
+                </div>
+
+                <!-- Detailed Life Stats -->
+                <div class="result-card life-stats">
+                    <h4>Life Summary</h4>
+                    <div class="stats-list">
+                        <div class="stat-row">
+                            <span>Weeks</span> <strong id="total-weeks">0</strong>
+                        </div>
+                        <div class="stat-row">
+                            <span>Hours</span> <strong id="total-hours">0</strong>
+                        </div>
+                        <div class="stat-row">
+                            <span>Minutes</span> <strong id="total-minutes">0</strong>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-        </div>
-    </main>
+            <div class="footer-area">
+                <button id="share-btn" class="share-link hidden"><i class="ri-share-forward-line"></i> Share
+                    Results</button>
+                <p class="credit">Designed by <strong>Muhammad Hassan</strong></p>
+            </div>
+        </section>
+    </div>
 
     <script src="index.js"></script>
 </body>
+
 </html>

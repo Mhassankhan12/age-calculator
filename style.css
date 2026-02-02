@@ -1,255 +1,266 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap');
+
 :root {
-    --bg-color: #f8fafc;
-    --card-bg: #ffffff;
-    --text-main: #0f172a;
-    --text-sub: #64748b;
-    --primary: #4f46e5;
-    --primary-hover: #4338ca;
-    --border: #cbd5e1;
-    --stat-bg: #f1f5f9;
-    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    /* Color Palette */
+    --primary-hue: 245; 
+    --primary-bg: hsl(var(--primary-hue), 80%, 98%);
+    --primary-accent: hsl(var(--primary-hue), 60%, 55%);
+    --primary-dark: hsl(var(--primary-hue), 65%, 45%);
+    
+    --text-main: hsl(220, 20%, 15%);
+    --text-muted: hsl(220, 15%, 45%);
+    --text-inverse: #ffffff;
+    
+    --panel-left-bg: linear-gradient(135deg, hsl(var(--primary-hue), 60%, 55%), hsl(260, 60%, 50%));
+    --panel-right-bg: #ffffff;
+    
+    --card-shadow: 0 8px 30px rgba(0,0,0,0.06);
+    --input-bg: #f3f4f6;
+    
+    --radius-lg: 32px;
+    --radius-md: 20px;
 }
 
 [data-theme="dark"] {
-    --bg-color: #0f172a;
-    --card-bg: #1e293b;
-    --text-main: #f8fafc;
-    --text-sub: #94a3b8;
-    --primary: #6366f1;
-    --primary-hover: #818cf8;
-    --border: #334155;
-    --stat-bg: #334155;
-    --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+    --primary-bg: #0f172a;
+    --primary-accent: hsl(var(--primary-hue), 70%, 65%);
+    --primary-dark: hsl(var(--primary-hue), 65%, 45%);
+    
+    --text-main: #f1f5f9;
+    --text-muted: #94a3b8;
+    
+    --panel-left-bg: linear-gradient(135deg, #1e1b4b, #312e81);
+    --panel-right-bg: #1e293b;
+    --input-bg: #334155;
+    
+    --card-shadow: 0 10px 40px rgba(0,0,0,0.5);
 }
 
-* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; transition: 0.3s ease; }
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Outfit', sans-serif; transition: background 0.3s ease, color 0.3s ease; }
 
 body {
-    background-color: var(--bg-color);
-    color: var(--text-main);
+    background-color: var(--primary-bg);
     min-height: 100vh;
     display: flex;
-    flex-direction: column;
-    overflow-x: hidden;
-}
-
-/* Navbar */
-.navbar {
-    width: 100%;
-    padding: 20px 40px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 10;
-}
-/* Logo Styling Updated for Link */
-.logo { 
-    font-size: 1.5rem; 
-    font-weight: 800; 
-    letter-spacing: -0.5px;
-    
-    /* Ye properties zaroori hain taake wo Link jaisa na dikhe */
-    text-decoration: none; /* Underline hatane ke liye */
-    color: var(--text-main); /* Theme ka color use karega */
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-}
-
-
-/* Hover effect (Optional - taake pata chale click ho sakta hai) */
-.logo:hover {
-    opacity: 0.9;
-   color: #4f46e5;
-}
-
-/* Main Container */
-.main-container {
-    flex: 1;
-    display: flex;
-    align-items: center;
     justify-content: center;
-    padding: 20px;
-    width: 100%;
+    align-items: center;
 }
 
-.card {
-    background-color: var(--card-bg);
-    width: 100%;
-    max-width: 550px;
-    padding: 40px;
-    border-radius: 24px;
-    box-shadow: var(--shadow-lg);
-    border: 1px solid var(--border);
-    text-align: center;
-}
-
-.card-header { margin-bottom: 25px; }
-.card-header h1 { font-size: 1.8rem; font-weight: 700; margin-bottom: 5px; }
-.card-header p { color: var(--text-sub); font-size: 0.95rem; }
-
-/* =========================================================
-   DESKTOP DEFAULT STYLES 
-   ========================================================= */
-
-.input-row {
+/* --- Container Structure --- */
+.app-container {
     display: flex;
-    gap: 15px;
-    margin-bottom: 30px;
-    flex-direction: row; 
-    align-items: stretch;
+    width: 90vw;
+    max-width: 1200px;
+    height: 85vh;
+    max-height: 800px;
+    background-color: var(--panel-right-bg);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--card-shadow);
+    overflow: hidden;
+    position: relative;
 }
+
+/* --- Left Panel (Visual) --- */
+.visual-panel {
+    flex: 1;
+    background: var(--panel-left-bg);
+    color: var(--text-inverse);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 60px;
+    position: relative;
+    clip-path: polygon(0 0, 100% 0, 90% 100%, 0% 100%);
+    z-index: 2;
+}
+
+.brand {
+    font-size: 1.8rem;
+    font-weight: 800;
+    letter-spacing: -1px;
+}
+.brand .highlight { opacity: 0.8; }
+
+.time-display h2 { font-size: 5rem; font-weight: 200; line-height: 1; }
+.time-display p { font-size: 1.2rem; opacity: 0.8; margin-top: 10px; font-weight: 300; }
+
+.quote-box {
+    margin-top: auto;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 20px;
+    border-radius: var(--radius-md);
+    border: 1px solid rgba(255,255,255,0.2);
+    font-weight: 300;
+    line-height: 1.6;
+}
+
+.theme-btn {
+    position: absolute;
+    top: 30px;
+    right: 40px; /* Adjusted position inside visual panel for desktop can be tricky, using absolute */
+    background: rgba(255,255,255,0.2);
+    border: none;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    color: #fff;
+    cursor: pointer;
+    font-size: 1.2rem;
+}
+.theme-btn:hover { background: rgba(255,255,255,0.3); transform: rotate(15deg); }
+
+
+/* --- Right Panel (Functional) --- */
+.functional-panel {
+    flex: 1.4;
+    padding: 50px 60px;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    color: var(--text-main);
+}
+
+.header-text h1 { font-size: 2.5rem; font-weight: 700; margin-bottom: 10px; }
+.header-text p { color: var(--text-muted); font-size: 1.1rem; }
+
+/* Input Area */
+.input-area { margin-bottom: 40px; margin-top: 30px; }
+.date-picker-wrapper {
+    display: flex;
+    align-items: flex-end;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.input-label { display: block; font-size: 0.9rem; color: var(--text-muted); margin-bottom: 8px; font-weight: 600; width: 100%; }
 
 input[type="date"] {
     flex: 2;
-    padding: 0 20px;
+    background: var(--input-bg);
+    border: 2px solid transparent;
     border-radius: 12px;
-    border: 1px solid var(--border);
-    background-color: var(--bg-color); /* Slight grey on desktop */
-    color: var(--text-main);
+    padding: 15px 20px;
     font-size: 1.1rem;
+    color: var(--text-main);
     outline: none;
-    cursor: pointer;
-    height: 55px;
+    min-width: 200px;
 }
+input[type="date"]:focus { border-color: var(--primary-accent); }
 
-.primary-btn {
+.action-btn {
     flex: 1;
-    background-color: var(--primary);
+    background: var(--primary-accent);
     color: #fff;
     border: none;
+    padding: 16px 25px;
     border-radius: 12px;
-    font-weight: 600;
     font-size: 1rem;
+    font-weight: 600;
     cursor: pointer;
+    white-space: nowrap;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 8px;
-    height: 55px; 
 }
-.primary-btn:hover { background-color: rgb(8, 8, 174); transform: translateY(-4px); }
+.action-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4); }
 
-
-/* Results Styling */
-.hidden { display: none; }
-.results { animation: slideUp 0.4s ease-out; }
-
-.stats-grid {
+/* Results Grid */
+.results-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 15px;
-    margin-bottom: 20px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    animation: fadeIn 0.6s ease-out;
+}
+.hidden { display: none; }
+
+.result-card {
+    background: var(--input-bg);
+    padding: 20px;
+    border-radius: var(--radius-md);
+    position: relative;
+    overflow: hidden;
 }
 
-.stat-box {
-    background-color: var(--stat-bg);
-    padding: 20px 10px;
-    border-radius: 16px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+.main-stats { grid-column: span 2; background: linear-gradient(120deg, var(--input-bg), rgba(99, 102, 241, 0.05)); }
+.main-stats h3 { color: var(--text-muted); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 15px; }
+.age-display { display: flex; justify-content: space-around; text-align: center; }
+.age-display .unit { display: flex; flex-direction: column; }
+.age-display span { font-size: 2.5rem; font-weight: 800; color: var(--primary-accent); line-height: 1; }
+.age-display small { color: var(--text-muted); font-size: 0.9rem; margin-top: 5px; }
+
+.zodiac-card, .next-bday-card { display: flex; align-items: center; gap: 15px; }
+.icon-bg {
+    width: 50px; height: 50px;
+    background: rgba(99, 102, 241, 0.1);
+    color: var(--primary-accent);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.5rem;
 }
+.card-label { font-size: 0.8rem; color: var(--text-muted); display: block; margin-bottom: 4px; }
+h4 { font-size: 1.2rem; font-weight: 700; }
+.sub-text { font-size: 0.85rem; color: var(--text-muted); }
 
-.stat-box .num { font-size: 2rem; font-weight: 800; color: var(--primary); line-height: 1; }
-.stat-box .label { font-size: 0.8rem; color: var(--text-sub); margin-top: 5px; text-transform: uppercase; letter-spacing: 0.5px; }
+.life-stats { grid-column: span 2; }
+.stats-list { display: flex; justify-content: space-between; margin-top: 15px; }
+.stat-row { text-align: center; }
+.stat-row span { display: block; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 5px; }
+.stat-row strong { font-size: 1.2rem; color: var(--text-main); }
 
-.extra-info {
-    background-color: var(--stat-bg);
-    border-radius: 16px;
-    padding: 15px;
-    display: flex;
-    justify-content: space-around;
+/* Footer Area */
+.footer-area { margin-top: auto; padding-top: 30px; display: flex; justify-content: space-between; align-items: center; }
+.share-link {
+    background: transparent; border: 1px solid var(--primary-accent); color: var(--primary-accent);
+    padding: 8px 16px; border-radius: 8px; cursor: pointer; display: flex; align-items: center; gap: 6px; font-weight: 500;
 }
+.share-link:hover { background: var(--primary-accent); color: #fff; }
+.credit { font-size: 0.8rem; color: var(--text-muted); }
 
-.info-item { display: flex; align-items: center; gap: 8px; font-size: 0.95rem; color: var(--text-main); }
-.info-item i { color: var(--primary); font-size: 1.2rem; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-.footer-credit { margin-top: 25px; font-size: 0.85rem; color: var(--text-sub); }
-.footer-credit strong { color: var(--primary); }
-
-@keyframes slideUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-
-/* =========================================================
-   MOBILE FIXES (CRITICAL UPDATE)
-   ========================================================= */
-
-@media (max-width: 600px) {
-    .navbar { padding: 15px 20px; }
-    
-    .card { 
-        padding: 30px 20px;
-        width: 100%;
-        margin-top: 50px;
-    }
-
-    .card-header h1 { font-size: 1.6rem; }
-
-    /* Stack Elements */
-    .input-row {
-        flex-direction: column !important;
-        gap: 15px;
-    }
-
-    /* --- FIXING THE UGLY INPUT --- */
-    input[type="date"] {
-        width: 100% !important;
-        height: 70px !important;
-        
-        /* 1. Make it White so it looks like an input */
-        background-color: #ffffff !important; 
-        
-        /* 2. Add Border and Rounding */
-        border: 2px solid var(--primary) !important;
-        border-radius: 15px !important;
-        
-        /* 3. Text Styling */
-        font-size: 1.3rem !important;
-        color: #000000 !important; /* Force Black Text */
-        padding: 0 20px;
-        
-        /* 4. Add Custom Calendar Icon (Because mobile hides the default one) */
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24' fill='%234f46e5'%3E%3Cpath d='M17 3h4a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h4V1h2v2h6V1h2v2zm-2 2H9v2H7V5H4v4h16V5h-3v2h-2V5zm5 6H4v8h16v-8z'/%3E%3C/svg%3E");
-        background-repeat: no-repeat;
-        background-position: right 20px center;
-        background-size: 28px;
-    }
-
-    /* Dark Mode Fix for Mobile Input */
-    [data-theme="dark"] input[type="date"] {
-        background-color: #1e293b !important;
-        color: #ffffff !important;
-        border-color: #6366f1 !important;
-    }
-
-    /* --- BIG BUTTON --- */
-    .primary-btn {
-        width: 100% !important;
-        height: 70px !important;
-        font-size: 1.3rem !important;
-        box-shadow: 0 4px 15px rgba(79, 70, 229, 0.4);
-    }
-
-    .stats-grid { gap: 10px; }
-    .stat-box .num { font-size: 1.6rem; }
-    
-    .extra-info {
+/* --- MOBILE RESPONSIVENESS (BREAKPOINT 850px) --- */
+@media (max-width: 850px) {
+    .app-container {
         flex-direction: column;
-        align-items: flex-start;
+        width: 100%;
+        height: auto;
+        border-radius: 0;
+        box-shadow: none;
+        max-height: none;
+    }
+    
+    .visual-panel {
+        clip-path: none;
+        padding: 40px 30px 60px 30px;
+        border-bottom-right-radius: 40px;
+        border-bottom-left-radius: 40px;
+        flex: 0;
+    }
+    .theme-btn { top: 30px; right: 30px; }
+    .time-display h2 { font-size: 3.5rem; margin-top: 20px; }
+    .quote-box { margin-top: 20px; font-size: 0.9rem; }
+    
+    .functional-panel {
+        padding: 40px 25px;
+        flex: 1;
+        overflow: visible;
+    }
+    
+    .input-row { flex-direction: column; }
+    .action-btn { width: 100%; padding: 18px; margin-top: 10px; }
+    
+    .results-grid {
+        grid-template-columns: 1fr;
         gap: 15px;
     }
-}
-.foot{
-     text-decoration: none;
-     color: #6366f1;
-}
-span{
-    color: #413ac1;
-}
-span:hover{
-    color: #0f172a;
+    .main-stats, .life-stats { grid-column: span 1; }
+    
+    .age-display span { font-size: 2rem; }
+    .stats-list { flex-direction: column; gap: 10px; }
+    .stat-row { display: flex; justify-content: space-between; border-bottom: 1px solid rgba(0,0,0,0.05); padding-bottom: 5px; }
+    .stat-row:last-child { border: none; }
+    
+    .footer-area { flex-direction: column-reverse; gap: 20px; align-items: center; text-align: center; }
 }

@@ -158,7 +158,7 @@ document.getElementById('share-btn').addEventListener('click', () => {
 
 // PWA Logic: register service worker only in production hosts
 if ("serviceWorker" in navigator) {
-    window.addEventListener("load", () => {
+    window.addEventListener("load", async () => {
         const isLocalhost = (
             location.protocol === 'file:' ||
             location.hostname === 'localhost' ||
@@ -171,6 +171,59 @@ if ("serviceWorker" in navigator) {
             return;
         }
 
-        navigator.serviceWorker.register("./sw.js").catch(err => console.log(err));
+        try {
+            const registration = await navigator.serviceWorker.register("./sw.js");
+
+            // If there's an already-waiting worker, prompt user to update
+            if (registration.waiting) {
+                promptUpdate(registration.waiting);
+            }
+
+            registration.addEventListener('updatefound', () => {
+                const newWorker = registration.installing;
+                if (!newWorker) return;
+                newWorker.addEventListener('statechange', () => {
+                    if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                        // New update available
+                        promptUpdate(newWorker);
+                    }
+                });
+            });
+
+            // When the new service worker takes control, reload to use fresh assets
+            navigator.serviceWorker.addEventListener('controllerchange', () => {
+                window.location.reload();
+            });
+        } catch (err) {
+            console.log(err);
+        }
     });
+}
+
+function promptUpdate(worker) {
+    const notice = document.getElementById('update-notice') || createUpdateBanner();
+    notice.classList.remove('hidden');
+
+    const reloadBtn = document.getElementById('reload-btn');
+    const dismissBtn = document.getElementById('dismiss-update');
+
+    reloadBtn.onclick = () => {
+        // Tell SW to skip waiting — it will activate and trigger controllerchange
+        try { worker.postMessage({ type: 'SKIP_WAITING' }); } catch (e) { console.log(e); }
+    };
+
+    dismissBtn.onclick = () => {
+        notice.classList.add('hidden');
+    };
+}
+
+function createUpdateBanner() {
+    const div = document.createElement('div');
+    div.id = 'update-notice';
+    div.className = 'update-notice';
+    div.setAttribute('role', 'status');
+    div.setAttribute('aria-live', 'polite');
+    div.innerHTML = '<span>New version available.</span> <button id="reload-btn">Reload</button> <button id="dismiss-update">Dismiss</button>';
+    document.body.appendChild(div);
+    return div;
 }

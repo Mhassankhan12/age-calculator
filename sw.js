@@ -49,3 +49,11 @@ self.addEventListener("fetch", (e) => {
     return cachedResponse || networkPromise;
   })());
 });
+
+// Listen for messages from the page (e.g., SKIP_WAITING)
+self.addEventListener('message', (e) => {
+  if (!e.data) return;
+  if (e.data.type === 'SKIP_WAITING') {
+    self.skipWaiting();
+  }
+});

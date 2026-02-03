@@ -1,26 +1,51 @@
-const CACHE_NAME = "age-calc-v1";
+const CACHE_NAME = "age-calc-v2";
 const ASSETS = [
-  "./",
-  "./index.html",
-  "./style.css",
-  "./index.js",
-  "./manifest.json"
+  "/",
+  "index.html",
+  "style.css",
+  "index.js",
+  "manifest.json",
+  "icon-512 copy.png"
 ];
 
-// 1. Install Service Worker & Cache Files
+// Install: cache app shell and activate immediately
 self.addEventListener("install", (e) => {
+  self.skipWaiting();
   e.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => {
-      return cache.addAll(ASSETS);
-    })
+    caches.open(CACHE_NAME).then((cache) => cache.addAll(ASSETS))
   );
 });
 
-// 2. Serve Files from Cache (Offline Mode)
-self.addEventListener("fetch", (e) => {
-  e.respondWith(
-    caches.match(e.request).then((response) => {
-      return response || fetch(e.request);
-    })
+// Activate: remove old caches and take control of clients
+self.addEventListener("activate", (e) => {
+  e.waitUntil(
+    caches.keys().then((keys) =>
+      Promise.all(
+        keys.map((key) => {
+          if (key !== CACHE_NAME) return caches.delete(key);
+        })
+      )
+    ).then(() => self.clients.claim())
   );
+});
+
+// Fetch: stale-while-revalidate strategy for GET requests
+self.addEventListener("fetch", (e) => {
+  if (e.request.method !== 'GET') return;
+
+  e.respondWith((async () => {
+    const cache = await caches.open(CACHE_NAME);
+    const cachedResponse = await cache.match(e.request);
+
+    // Try network in background and update the cache
+    const networkPromise = fetch(e.request).then((networkResponse) => {
+      if (networkResponse && networkResponse.ok) {
+        cache.put(e.request, networkResponse.clone());
+      }
+      return networkResponse;
+    }).catch(() => {});
+
+    // Return cached if available, else wait for network
+    return cachedResponse || networkPromise;
+  })());
 });

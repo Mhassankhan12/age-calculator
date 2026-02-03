@@ -156,9 +156,21 @@ document.getElementById('share-btn').addEventListener('click', () => {
     });
 });
 
-// PWA Logic (Preserved)
+// PWA Logic: register service worker only in production hosts
 if ("serviceWorker" in navigator) {
-  window.addEventListener("load", () => {
-    navigator.serviceWorker.register("./sw.js").catch(err => console.log(err));
-  });
+    window.addEventListener("load", () => {
+        const isLocalhost = (
+            location.protocol === 'file:' ||
+            location.hostname === 'localhost' ||
+            location.hostname === '127.0.0.1' ||
+            location.hostname === '::1'
+        );
+
+        if (isLocalhost) {
+            console.log('Service worker disabled on localhost for development.');
+            return;
+        }
+
+        navigator.serviceWorker.register("./sw.js").catch(err => console.log(err));
+    });
 }
